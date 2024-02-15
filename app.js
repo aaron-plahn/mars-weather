@@ -107,6 +107,9 @@ const syncDom = (state) =>{
     }
 
     if(selectedDate !== null && typeof selectedDate !== 'undefined'){
+        // clear previous state
+        rootElement.innerHTML = '';
+
         const component = document.createElement('htu-weather-detail');
 
         rootElement.appendChild(component);
