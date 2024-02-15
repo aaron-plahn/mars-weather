@@ -54,6 +54,31 @@ class WeatherReport {
     }
 }
 
+
+class WeatherDetailComponent extends HTMLElement{
+    constructor(){
+        super();
+    }
+
+    set solNumber(newSolNumber){
+        this._solNumber = newSolNumber;
+    }
+
+    get solNumber(){
+        return this._solNumber;
+    }
+
+    connectedCallback(){
+        const template = document.getElementById("weather-detail-template");
+
+        const content = template.content.cloneNode(true);
+
+        this.appendChild(content);
+    }
+}
+
+customElements.define('htu-weather-detail',WeatherDetailComponent);
+
 const isWeatherReport = (input) => input !== null && typeof input !== 'undefined' && typeof input.AT === 'object'
 
 // Inject dependencies
@@ -74,6 +99,7 @@ const syncDom = (state) =>{
 
     const rootElement = document.querySelector('#weather-summary')
 
+    // makeshift router
     if(isLoading){
         rootElement.innerHTML = `<h2>Loading...</h2>`;
 
@@ -81,27 +107,26 @@ const syncDom = (state) =>{
     }
 
     if(selectedDate !== null && typeof selectedDate !== 'undefined'){
+        const component = document.createElement('htu-weather-detail');
+
+        rootElement.appendChild(component);
+
         const weatherForLocation = weatherMap.get(selectedDate);
 
         const {maximumTemperature, minimumTemperature, averageTemperature} = weatherForLocation;
 
-        rootElement.innerHTML = `<h2>Sol ${selectedDate}</h2><p>Max: ${maximumTemperature}, Min: ${minimumTemperature}, Temp: ${averageTemperature}</p>`;
+        component.querySelector("#sol-title").textContent = selectedDate;
 
-        const resetButton = document.createElement('button');
-        
-        resetButton.appendChild(document.createTextNode('Menu'));
+        component.querySelector("#min").textContent = minimumTemperature;
 
-        resetButton.addEventListener('click',()=>{
-            setState({
-                selectedDate: undefined
-            })
-        });
+        component.querySelector("#max").textContent = maximumTemperature;
 
-        rootElement.appendChild(resetButton);
+        component.querySelector("#avg").textContent = averageTemperature;
 
         return;
     }
 
+    // default - date index menu
     const dateSelection = document.createElement('select');
 
     dateSelection.name = "select-date";
@@ -149,6 +174,12 @@ const setState = (stateUpdates) =>{
     };
 
     syncDom(state);
+}
+
+const returnToMenu = ()=>{
+    setState({
+        selectedDate: undefined
+    })
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
