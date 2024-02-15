@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="#">
     <title>Mars Weather Report</title>
@@ -16,7 +17,9 @@
         <p>Learn more about the weather forecast for Mars from <a href="https://mars.nasa.gov/insight/mission/weather/" target="_blank">NASA</a>.</p>
     </section>
     <template id="weather-detail-template">
-        <h2 id="sol-title"></h2>
+        <div id="weather-card">
+
+        <h2 >Sol: <span id="sol-title"></span></h2>
         <div>
             <em>Minimum </em><span id="min"></span>
         </div>
@@ -26,6 +29,8 @@
         <div>
             <em>Average </em><span id="avg"></span>
         </div>
+    </div>
+
         <button onclick="returnToMenu()">MENU</button>
     </template>
 </body>

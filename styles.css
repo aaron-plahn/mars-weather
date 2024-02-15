@@ -1,0 +1,53 @@
+:root {
+    --mainColor: #336699;
+    --secondary: #9a9a9a;
+    --tertiary: #FFFFFF;
+    --mainTextColor: rgb(255, 255, 255);
+}
+
+body {
+    color: var(--mainTextColor);
+    background: var(--secondary);
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0 200px 0 200px
+}
+
+h1 {
+    font-size: 70px;
+    -webkit-text-stroke: var(--mainColor) 1px;
+}
+
+select,
+button {
+    background: var(--mainColor);
+    color: var(--mainTextColor);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: large;
+    margin-top: 10px;
+}
+
+section {
+    color: var(--mainTextColor);
+    height: 100px;
+    padding: 0px;
+}
+
+em {
+    margin-right: 10px;
+}
+
+#weather-card {
+    padding: 20px 25px 25px 25px;
+    border: 1px solid var(--mainTextColor);
+    background: var(--mainColor);
+    width: fit-content;
+    margin-bottom: 20px;
+}
+
+#weather-card>h2 {
+    margin: 0 0 14px 0;
+    border-bottom: 1px solid var(--mainTextColor);
+    padding-bottom: 12px;
+}

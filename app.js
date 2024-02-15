@@ -160,7 +160,7 @@ const syncDom = (state) =>{
 
     const heading = document.createElement('h2');
 
-    heading.textContent = `Choose a date:`;
+    heading.textContent = `Choose a date (Sol)`;
 
     rootElement.innerHTML = '';
 
